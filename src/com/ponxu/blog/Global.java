@@ -8,6 +8,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ponxu.utils.StringUtils;
 
+/**
+ * 系统配置,修改了此处,往往需要重启tomcat
+ * 
+ * @author xwz
+ *
+ */
 public final class Global {
 	private static final Log LOG = LogFactory.getLog(Global.class);
 	private static final String SEPARATOR = ",";
