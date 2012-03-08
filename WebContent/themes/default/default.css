@@ -1,0 +1,302 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 微软雅黑, vardana, arial, 华文黑体, 宋体;
+	text-decoration: none;
+}
+
+.clear {
+	clear: both;
+}
+
+body {
+	background-color: #545454;
+}
+
+#main_width {
+	width: 1000px;
+	background-color: #F8F8F8;
+	margin: 0px auto;
+	border: 2px solid #424242;
+	border-top: none;
+}
+
+.hava_red_a {
+	
+}
+
+.hava_red_a_black {
+	
+}
+
+.hava_red_a a {
+	color: #fafafa;
+}
+
+.hava_red_a_black a {
+	color: #595760;
+}
+
+.hava_red_a a:hover,.hava_red_a_black a:hover {
+	color: #f00;
+}
+
+/**------------------------------**/
+#header_bar {
+	height: 70px;
+	background-color: #000;
+	color: #fafafa;
+	font-size: 15px;
+	overflow: hidden;
+	border-bottom: 2px solid #424242;
+}
+
+#header_bar a {
+	color: #fafafa;
+}
+
+#header_bar a:hover {
+	color: #f00;
+}
+
+.header-left {
+	float: left;
+}
+
+.header-right {
+	float: right;
+	text-align: right;
+}
+
+#header_menu {
+	list-style: none;
+}
+
+#header_menu li {
+	float: left;
+	margin: 0px 5px;
+}
+
+#header_menu li a {
+	display: block;
+	padding: 2px 5px;
+}
+
+/**------------------------------**/
+#footer {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background-color: #000;
+	color: #fafafa;
+	font-size: 14px;
+	overflow: hidden;
+	border-top: 2px solid #424242;
+	background-color: #000;
+}
+
+/**------------------------------**/
+#content {
+	min-height: 500px;
+	width: 100%;
+}
+
+#main_content {
+	float: left;
+	margin: 20px 5px 5px 30px;
+	width: 670px;
+}
+
+.post_list {
+	width: 100%;
+	border-bottom: 1px solid #C1C1C1;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+
+.post_list h3 {
+	padding: 5px;
+	border-bottom: 1px dotted #C1C1C1;
+}
+
+.info {
+	font-style: italic;
+	font-size: 12px;
+	margin: 2px 10px;
+	text-align: right;
+}
+
+.abs {
+	min-height: 80px;
+	margin: 5px 20px;
+	word-break: break-all;
+}
+
+.abs,.abs * {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+#page_nav {
+	text-align: center;
+	margin: 0px 0px 14px 0px;
+}
+
+/**------------------------------**/
+#side_bar {
+	float: right;
+	margin: 20px 15px 5px 0px;
+	width: 265px;
+}
+
+.widget {
+	width: 100%;
+	border-bottom: 1px solid #C1C1C1;
+	padding: 5px;
+}
+
+.widget h4 {
+	color: #595760;
+}
+
+.input {
+	padding: 2px;
+	width: 200px;
+}
+
+.btn {
+	margin: 0;
+	border: 1px solid gray;
+	padding: 2px 10px;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: #424242;
+	color: #fff;
+}
+
+.cat_list {
+	list-style: none;
+}
+
+.cat_list li {
+	margin: 2px 0px 2px 10px;
+}
+
+.cat_list li a {
+	font-size: 14px;
+}
+/**------------------------------**/
+.tag_list {
+	list-style: none;
+}
+
+.tag_list li {
+	float: left;
+	margin: 5px;
+}
+
+.tag_list li a {
+	display: block;
+	padding: 5px 10px;
+	border: 1px #808080 solid;
+	background-color: #F0F0F0;
+}
+
+.tag_list li a:hover {
+	background-color: #424242;
+}
+/**------------------------------**/
+#comments {
+	
+}
+
+#comments ul {
+	list-style: none;
+}
+
+#comments ul li {
+	padding: 5px 10px;
+	margin-bottom: 15px;
+	border-top: 1px solid #C1C1C1;
+	border: 1px solid #C1C1C1;
+	background-color: #fff;
+}
+
+#comments ul li:hover {
+	background-color: #f0f0f0;
+}
+
+.commentleft {
+	float: left;
+	text-align: center;
+	width: 45px;
+}
+
+.commentleft .info {
+	margin: 0;
+	text-align: center;
+}
+
+.commentleft .gravatar {
+	
+}
+
+.commentleft .gravatar img {
+	height: 36px;
+	width: 36px;
+	border: none;
+	/*background: url("./images/g.png") no-repeat;*/
+	background-color: #F8F8F8;
+}
+
+.commentright {
+	float: right;
+	width: 595px;
+}
+
+.commentright .info {
+	margin: 0;
+	text-align: left;
+}
+
+.commentright .commenttext {
+	margin-top: 5px;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.refer {
+	border: 1px dashed #C1C1C1;
+	padding: 0px 10px;
+	margin: 5px;
+}
+
+/*----*/
+#comment_add {
+	
+}
+
+#comment_add p {
+	margin: 5px 0px 10px 0px;
+}
+
+#comment_add .comment_left {
+	float: left;
+}
+
+#comment_add p label {
+	display: block;
+}
+
+#comment_add .comment_right {
+	float: right;
+}
+
+#comment_add .comment_right #ccontent {
+	width: 430px;
+	height: 130px;
+}
+
+/**------------------------------**/

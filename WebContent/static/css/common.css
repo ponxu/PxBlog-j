@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 微软雅黑, vardana, arial, 华文黑体, 宋体;
+}
+
+.clear {
+	clear: both;
+}
+
+.halftrans {
+	filter: alpha(Opacity = 80);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	background-color: #1B1B1B;
+}
+
+.rcorner {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.shadow {
+	-webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+.btn {
+	background-color: #fff;
+	color: #000;
+	border: 1px #969696 solid;
+	font-size: 15px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+.input {
+	border: 1px #4B4B4B solid;
+	font-size: 15px;
+	padding: 5px;
+}
+
+select.input {
+	padding: 4px 5px;
+}
+
+#logindiv p {
+	margin-bottom: 10px;
+}

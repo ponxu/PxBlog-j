@@ -1,0 +1,9 @@
+home.ftl		首页面
+post.ftl		文章详情
+search.ftl		搜索结果: 搜索结果,按分类,按标签
+comment.ftl		显示评论列表, 分页查询时,将返回此列表内容
+
+page.ftl		页面(无此需求,可无)
+about.ftl		关于(无此需求,可无)
+tags.ftl		标签云(无此需求,可无)
+board.ftl		留言(无此需求,可无)
