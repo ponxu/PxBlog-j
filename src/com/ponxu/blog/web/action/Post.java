@@ -19,11 +19,18 @@ public class Post extends BlogAction {
 		if (id > 0) {
 			post = postService.load(id);
 			put("post_terms", taxonomyService.queryForObject(new long[] { id }, PostService.TAXONOMY));
+
+			String author = cookieGet("pxb_comment_author");
+			String email = cookieGet("pxb_comment_author_email");
+			String url = cookieGet("pxb_comment_author_url");
+
+			put("pxb_comment_author", author);
+			put("pxb_comment_author_email", email);
+			put("pxb_comment_author_url", url);
 		} else {
 			post = new HashMap<String, String>();
 		}
 		put("post", post);
-		put("terms", taxonomyService.queryAll(null, Service.EMPTY_PARAMS));
 
 		return POST_FTL;
 	}

@@ -33,21 +33,21 @@ public class BlogService extends Service {
 
 	/**
 	 * <b>缓存时间</b><br>
-	 * 调试模式缓存9秒,非调试缓存5分钟<br>
+	 * 调试模式缓存9秒,非调试缓存60分钟<br>
 	 * 此时间只对全局缓存有效
 	 */
-	private static final long CACHE_TIME = Global.debug ? 9000 : 1000 * 60 * 5;
+	private static final long CACHE_TIME = Global.debug ? 9000 : 1000 * 60 * 60;
 	/** 全局 */
 	private static final Map<String, SoftReference<Object>> GLOBAL_CACHE = new ConcurrentHashMap<String, SoftReference<Object>>();
 	/** 线程 */
 	// private static final ThreadLocal<Map<String, SoftReference<Object>>>
 	// THREAD_CACHE = new ThreadLocal<Map<String, SoftReference<Object>>>();
 
-	private static final String CACHE_KEY_CATEGORY = "CACHE_KEY_CATEGORY";
-	private static final String CACHE_KEY_LASTED_COMMENT = "CACHE_KEY_LASTED_COMMENT";
-	private static final String CACHE_KEY_LASTED_POST = "CACHE_KEY_LASTED_POST";
-	private static final String CACHE_KEY_RANDOM_POST = "CACHE_KEY_RANDOM_POST";
-	private static final String CACHE_KEY_LINK = "CACHE_KEY_LINK";
+	public static final String CACHE_KEY_CATEGORY = "CACHE_KEY_CATEGORY";
+	public static final String CACHE_KEY_LASTED_COMMENT = "CACHE_KEY_LASTED_COMMENT";
+	public static final String CACHE_KEY_LASTED_POST = "CACHE_KEY_LASTED_POST";
+	public static final String CACHE_KEY_RANDOM_POST = "CACHE_KEY_RANDOM_POST";
+	public static final String CACHE_KEY_LINK = "CACHE_KEY_LINK";
 
 	/**
 	 * 放入缓存
@@ -79,6 +79,10 @@ public class BlogService extends Service {
 			val = soft.get();
 		}
 		return val;
+	}
+
+	public static void removeCache(String key) {
+		GLOBAL_CACHE.remove(key);
 	}
 
 	/**
@@ -260,17 +264,23 @@ public class BlogService extends Service {
 		List<Map<String, String>> list = (List<Map<String, String>>) getCache(CACHE_KEY_RANDOM_POST);
 		if (list == null || (System.currentTimeMillis() - randomPostsLastQuery) > CACHE_TIME) {
 			// 数据库查询
-			list = posts(null, "rand()", 1, gint("random_comment_size"));
+			list = posts(null, "rand()", 1, gint("random_post_size"));
 			// 缓存
 			setGlobalCache(CACHE_KEY_RANDOM_POST, list);
 
-			latestPostsLastQuery = System.currentTimeMillis();
+			randomPostsLastQuery = System.currentTimeMillis();
 		}
 		return list;
 	}
 
+	// Debug
 	public int getQueryCount() {
 		return DBManager.getQueryCount();
+	}
+
+	// Debug
+	public List<String> getQuerySql() {
+		return DBManager.getQuerySql();
 	}
 
 	/**

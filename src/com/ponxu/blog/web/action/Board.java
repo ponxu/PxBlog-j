@@ -26,6 +26,14 @@ public class Board extends BlogAction {
 			String idstr = list.get(0).get("id");
 			Map<String, String> post = postService.load(Long.parseLong(idstr));
 			put("post", post);
+			
+			String author = cookieGet("pxb_comment_author");
+			String email = cookieGet("pxb_comment_author_email");
+			String url = cookieGet("pxb_comment_author_url");
+
+			put("pxb_comment_author", author);
+			put("pxb_comment_author_email", email);
+			put("pxb_comment_author_url", url);
 		}
 		return BOARD_FTL;
 	}

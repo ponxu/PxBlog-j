@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="commentright">
-				<p class="info"><a href="#comment_add" onclick="refer('li${c.comment_id}')" style="float: right; display: none;">引用</a>By: ${c.comment_author}&nbsp;&nbsp;&nbsp;When: ${c.comment_date}</p>
+				<p class="info"><a href="#comment_add" onclick="refer('li${c.comment_id}')" style="float: right; display: none;">引用</a>By: ${c.comment_author}&nbsp;&nbsp;&nbsp;When: ${c.comment_date?substring(0, 19)}</p>
 				<div class="commenttext">${c.comment_content}</div>
 			</div>
 			<div class="clear"></div>

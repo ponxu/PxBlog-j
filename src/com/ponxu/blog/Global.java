@@ -25,6 +25,7 @@ public final class Global {
 	public static String encoding;
 	public static String tablePrefix;
 	public static String authPathPrefix;
+	public static int sessionMax;
 
 	// URLRewriteFilter 设置
 	public static String[] ignorePrefix;
@@ -44,6 +45,7 @@ public final class Global {
 			encoding = p.getProperty("encoding", "UTF-8");
 			tablePrefix = p.getProperty("tablePrefix", "pxb_");
 			authPathPrefix = p.getProperty("authPathPrefix", "/admin/");
+			sessionMax = Integer.parseInt(p.getProperty("sessionMax", "3600"));
 
 			// URLRewriteFilter 设置
 			// 前缀

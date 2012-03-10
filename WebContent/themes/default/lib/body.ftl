@@ -43,6 +43,13 @@
 	<div id="footer" class="hava_red_a">
 		<a href="${appPath}/login">登录</a>
 		查询:${blog.queryCount}
+		<#if blog.querySql?has_content>
+		<ul>
+			<#list blog.querySql as sql>
+			<li>${sql}</li>
+			</#list>
+		</ul>
+		</#if>
 	</div><!--footer-->
 </div><!--main_width-->
 </body>

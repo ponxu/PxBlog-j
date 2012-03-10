@@ -28,6 +28,8 @@ public class PostService extends Service {
 	public long save(Map<String, Object> post, long[] cat, long[] tag) {
 		long postId = save(TABLE_POST, post);
 		if (postId > 0) {
+			BlogService.removeCache(BlogService.CACHE_KEY_LASTED_POST);
+			BlogService.removeCache(BlogService.CACHE_KEY_RANDOM_POST);
 			// 删除所有关系
 			taxonomyService.removeAllRelationship(postId, TAXONOMY);
 			// 重新建立关系
@@ -59,6 +61,9 @@ public class PostService extends Service {
 
 		int i = update(TABLE_POST, post, wheres);
 		if (i > 0) {
+			BlogService.removeCache(BlogService.CACHE_KEY_LASTED_POST);
+			BlogService.removeCache(BlogService.CACHE_KEY_RANDOM_POST);
+
 			// 删除所有关系
 			taxonomyService.removeAllRelationship(postId, TAXONOMY);
 			// 重新建立关系
@@ -165,8 +170,11 @@ public class PostService extends Service {
 		// 删除文章
 		String sql = "delete from " + tableName(TABLE_POST) + " where id=?";
 		int i = DBManager.executeUpdate(sql, new Object[] { id });
-		
+
 		if (i > 0) {
+			BlogService.removeCache(BlogService.CACHE_KEY_LASTED_POST);
+			BlogService.removeCache(BlogService.CACHE_KEY_RANDOM_POST);
+
 			// 删除关系
 			List<Map<String, String>> list = taxonomyService.queryForObject(new long[] { id }, TAXONOMY);
 			for (Map<String, String> map : list) {

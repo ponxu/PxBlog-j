@@ -56,6 +56,9 @@ public class Comment extends BlogAction {
 		}
 
 		long cid = commentService.save(comment);
+		cookieSet("pxb_comment_author", author);
+		cookieSet("pxb_comment_author_email", email);
+		cookieSet("pxb_comment_author_url", url);
 		ret.put("message", "成功!");
 		ret.put("status", true);
 		ret.put("comment_id", cid);

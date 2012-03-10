@@ -49,7 +49,7 @@ public class URLRewriteFilter implements Filter {
 
 			// 权限校验
 			if (!checkAuth(request, response)) {
-				WebUtils.redirect(request, response, LOGIN_PAGE);
+				WebUtils.redirect(request, response, LOGIN_PAGE + "?referer=" + uri);
 				return;
 			}
 
@@ -70,8 +70,7 @@ public class URLRewriteFilter implements Filter {
 		} catch (Exception e) {
 			DBManager.rollback();
 		} finally {
-			DBManager.commit();
-			DBManager.release();
+			DBManager.commitAndRelease();
 		}
 	}
 
@@ -85,7 +84,7 @@ public class URLRewriteFilter implements Filter {
 		String uri = request.getServletPath();
 		if (uri.startsWith(Global.authPathPrefix) && WebUtils.sessionGet(request, "admin") == null) {
 			LOG.debug("Can't access: " + uri);
-			
+
 			canNext = false;
 		}
 		return canNext;

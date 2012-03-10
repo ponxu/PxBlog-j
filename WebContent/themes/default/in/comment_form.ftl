@@ -6,15 +6,15 @@
 		<div class="comment_left">
 			<p>
 				<label for="author">昵称</label>
-				<input type="input" id="author" name="author" class="input">
+				<input type="input" id="author" name="author" class="input" value="${pxb_comment_author!''}">
 			</p>
 			<p>
-				<label for="email">邮箱</label>
-				<input type="input" id="email" name="email" class="input">
+				<label for="email">邮箱(支持<a href="http://en.gravatar.com" target="_blank">Gravatar头像</a>)</label>
+				<input type="input" id="email" name="email" class="input" value="${pxb_comment_author_email!''}">
 			</p>
 			<p>
 				<label for="url">网站</label>
-				<input type="input" id="url" name="url" class="input">
+				<input type="input" id="url" name="url" class="input" value="${pxb_comment_author_url!''}">
 			</p>
 		</div>
 		
@@ -94,6 +94,7 @@
 						showSubmitTip(data.msg);
 					} else {
 						editor.text("");
+						showSubmitTip("留言成功, 可点击[刷新]查看!");
 					}
 					
 					$("#submitBtn").val(" 提 交 ");

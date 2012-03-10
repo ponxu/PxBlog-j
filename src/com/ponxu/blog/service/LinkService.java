@@ -20,4 +20,15 @@ public class LinkService extends Service {
 		List<Map<String, String>> list = DBManager.executeQuery(WRAPPER, sql, params);
 		return list;
 	}
+
+	public long save(Map<String, Object> link) {
+		BlogService.removeCache(BlogService.CACHE_KEY_LINK);
+		return save(TABLE_LINK, link);
+	}
+
+	public int del(long id) {
+		BlogService.removeCache(BlogService.CACHE_KEY_LINK);
+		String sql = "delete from " + tableName(TABLE_LINK) + " where link_id=?";
+		return DBManager.executeUpdate(sql, id);
+	}
 }

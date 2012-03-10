@@ -40,6 +40,7 @@ public class CommentService extends Service {
 	public long save(Map<String, Object> comment) {
 		long i = save(TABLE_COMMENT, comment);
 		if (i > 0) {
+			BlogService.removeCache(BlogService.CACHE_KEY_LASTED_COMMENT);
 			// 增加评论时, 文章表应相应增加
 			long postid = (Long) comment.get("comment_post_id");
 			postService.commentAdded(postid);
@@ -49,6 +50,8 @@ public class CommentService extends Service {
 	}
 
 	public int del(long id) {
+		BlogService.removeCache(BlogService.CACHE_KEY_LASTED_COMMENT);
+
 		String sql = "delete from " + tableName(TABLE_COMMENT) + " where comment_id=?";
 		return DBManager.executeUpdate(sql, new Object[] { id });
 	}

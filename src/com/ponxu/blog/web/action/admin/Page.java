@@ -9,9 +9,9 @@ import java.util.Map;
 
 import com.ponxu.blog.service.PostService;
 import com.ponxu.blog.service.Service;
-import com.ponxu.blog.service.TaxonomyService;
 import com.ponxu.blog.web.PageInfo;
 import com.ponxu.blog.web.action.BlogAction;
+import com.ponxu.utils.CollectionUtils;
 import com.ponxu.utils.StringUtils;
 import com.ponxu.utils.TimeUtils;
 
@@ -19,12 +19,12 @@ import com.ponxu.utils.TimeUtils;
  * @author xwz
  * 
  */
-public class Post extends BlogAction {
-	public static final String EDIT_FTL = "post.ftl";
-	public static final String LIST_FTL = "post_list.ftl";
+public class Page extends BlogAction {
+	public static final String EDIT_FTL = "page.ftl";
+	public static final String LIST_FTL = "page_list.ftl";
 
 	private static PostService postService = Service.get(PostService.class);
-	private static TaxonomyService taxonomyService = Service.get(TaxonomyService.class);
+	private static long[] empty = {};
 
 	public String del() {
 		long id = getIntParameter("id");
@@ -38,12 +38,23 @@ public class Post extends BlogAction {
 		Map<String, String> post = null;
 		if (id > 0) {
 			post = postService.load(id);
-			put("post_terms", taxonomyService.queryForObject(new long[] { id }, PostService.TAXONOMY));
 		} else {
-			post = new HashMap<String, String>();
+			String type = getStringParameter("type");
+			if ("about".equalsIgnoreCase(type) || "board".equalsIgnoreCase(type)) {
+				String where = "post_type=?";
+				PageInfo page = new PageInfo(1, 1);
+				List<Map<String, String>> list = postService.queryPage(where, page, type);
+				if (CollectionUtils.isNotEmpty(list)) {
+					post = list.get(0);
+				}
+			}
+
+			if (post == null) {
+				post = new HashMap<String, String>();
+				post.put("post_type", StringUtils.defaultString(type, "page"));
+			}
 		}
 		put("post", post);
-		put("terms", taxonomyService.queryAll(null, Service.EMPTY_PARAMS));
 		return EDIT_FTL;
 	}
 
@@ -51,42 +62,10 @@ public class Post extends BlogAction {
 	public String save() {
 		long id = getIntParameter("id");
 		String title = getStringParameter("title");
-		long cat = getIntParameter("category");
-		String newcat = getStringParameter("newcategory");
 		String content = getStringParameter("content");
-		String[] tag = request.getParameterValues("tag");
 		String postStatus = getStringParameter("post_status");
 		String commentStatus = getStringParameter("comment_status");
-
-		// 新建分类
-		if (cat == -1) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("name", newcat);
-			map.put("description", newcat);
-			map.put("taxonomy", "category");
-			cat = taxonomyService.save(map);
-			if (cat == 0) { // 分类保存失败
-				msg("新建分类失败!");
-				put("post", request.getParameterMap());
-				return EDIT_FTL;
-			}
-		}
-
-		// 标签
-		long[] tagNum = new long[tag.length];
-		for (int i = 0; i < tag.length; i++) {
-			long tagId = 0;
-			if (StringUtils.isNotNumeric(tag[i])) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("name", tag[i]);
-				map.put("description", tag[i]);
-				map.put("taxonomy", "post_tag");
-				tagId = taxonomyService.save(map);
-			} else {
-				tagId = Long.parseLong(tag[i]);
-			}
-			tagNum[i] = tagId;
-		}
+		String type = getStringParameter("post_type");
 
 		Map<String, String> user = (Map<String, String>) sessionGet("user");
 		long author = Long.parseLong(user.get("id"));
@@ -96,33 +75,32 @@ public class Post extends BlogAction {
 		post.put("post_content", content);
 		post.put("post_title", title);
 		post.put("post_status", postStatus);
+		post.put("post_type", type);
 		post.put("comment_status", commentStatus);
 
 		// 保存文章
 		if (id == 0) {
 			post.put("post_date", TimeUtils.now());
-			id = postService.save(post, new long[] { cat }, tagNum);
+			id = postService.save(post, empty, empty);
 		} else {
 			post.put("id", id);
 			post.put("post_modified", TimeUtils.now());
-			postService.update(post, new long[] { cat }, tagNum);
+			postService.update(post, empty, empty);
 		}
 
-		redirect("/admin/Post_edit.do?id=" + id);
+		redirect("/admin/Page_edit.do?id=" + id);
 		return DONT_FTL;
 	}
 
 	public String all() {
-		String where = "";
+		String where = "post_type<>'post'";
 		Object[] params = {};
 
 		PageInfo page = new PageInfo(request, blogService.getPageSize());
 
 		List<Map<String, String>> list = postService.queryPage(where, page, params);
-		List<Map<String, String>> postTerms = postService.queryTaxonomy(list);
 
 		put("list", list);
-		put("post_terms", postTerms);
 		put("page", page);
 
 		return LIST_FTL;

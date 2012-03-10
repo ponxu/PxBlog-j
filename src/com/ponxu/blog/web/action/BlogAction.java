@@ -38,6 +38,8 @@ import freemarker.template.TemplateModelException;
  */
 public class BlogAction extends Action {
 	private static final Log LOG = LogFactory.getLog(BlogAction.class);
+	/** 不进行模板处理 */
+	protected static final String DONT_FTL = null;
 	private static Configuration cfg;
 	// 工具类
 	private static Class<?>[] defaultStaticClasses = { StringUtils.class, TimeUtils.class };

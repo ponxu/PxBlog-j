@@ -58,14 +58,15 @@
 	<h4><a href="#">博客内容</a></h3>
 	<ul class="nav">
 		<li><a href="${appPath}/admin/Post_all.do">所有文章</a></li>
-		<li><a href="${appPath}/admin/Post_edit.do">写文章</a></li>
-		<li><a href="${appPath}/admin/Comment_list.do">评论</a></li>
-		
+		<li><a href="${appPath}/admin/Post_edit.do">编辑文章</a></li>
+		<li><a href="${appPath}/admin/Comment_list.do">评论管理</a></li>
+
 		<li><a href="${appPath}/admin/Taxonomy_cat.do">分类目录</a></li>
 		<li><a href="${appPath}/admin/Taxonomy_tag.do">文章标签</a></li>
-		
+
 		<li><a href="${appPath}/admin/Page_all.do">所有页面</a></li>
-		<li><a href="${appPath}/admin/Link_all.do">所有链接</a></li>
+		<li><a href="${appPath}/admin/Page_edit.do">编辑页面</a></li>
+		<li><a href="${appPath}/admin/Link.do">所有链接</a></li>
 	</ul>
 	
 	<h4><a href="#">博客设置</a></h3>

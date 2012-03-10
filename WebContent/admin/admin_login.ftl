@@ -8,6 +8,7 @@
 <body>
 	<div id="logindiv" style="margin: 250px auto 0px auto; width: 660px; text-align: center;">
 		<form action="${appPath}/login_in" method="post">
+			<input type="hidden" name="referer" value="${referer!''}">
 			<label for="username">用户名:</label>
 			<input type="text" class="input rcorner" style="width: 200px;" name="username" id="username">
 			

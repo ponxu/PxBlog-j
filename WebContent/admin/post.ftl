@@ -64,8 +64,8 @@
 	$(document).ready(function() {
 		var editor = KindEditor.create('textarea[name="content"]', {
 			themeType: "simple",
-			uploadJson: '${appPath}/admin/upload_json.jsp',
-			fileManagerJson: "${appPath}/admin/file_manager_json.jsp",
+			uploadJson: '${appPath}/admin/kindeditor_jsp/upload_json.jsp',
+			fileManagerJson: "${appPath}/admin/kindeditor_jsp/file_manager_json.jsp",
 			allowFileManager: true
 		});
 		
